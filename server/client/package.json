@@ -9,7 +9,7 @@
     "clear": "rm -rf ./public",
     "build:dev": "rm -rf ./public && webpack",
     "build:dev--watch": "webpack -d -w",
-    "build": "rm -rf ./public && webpack -p",
+    "build": "export NODE_ENV=production || SET \"NODE_ENV=production\" && rm -rf ./public && webpack -p",
     "lint": "eslint **/*.{js, jsx} --quiet",
     "format": "prettier --write --single-quote --print-width=120 --parser=flow --tab-width=2 \"src/**/*.{js, jsx}\"",
     "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha ./src/__test__/**/*.test.jsx --compilers js:babel-core/register",
