@@ -10,7 +10,8 @@
     "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha server/**/*.test.js",
     "test:watch": "nodemon --exec \"yarn run test\"",
     "client": "npm run dev --prefix server/client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm i --prefix client && npm run build --prefix client"
   },
   "dependencies": {
     "body-parser": "^1.18.2",
