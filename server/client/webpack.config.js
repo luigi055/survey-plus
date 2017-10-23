@@ -7,7 +7,8 @@ const devPORT = 8080;
 const publicFile = 'public';
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-process.env.STRIPE_PUBLISHABLE_KEY = process.env.STRIPE_PUBLISHABLE_KEY;
+process.env.STRIPE_PUBLISHABLE_KEY =
+  process.env.STRIPE_PUBLISHABLE_KEY || 'pk_test_QrRdEH5ldTtGc2PrlM53URXZ';
 const env = process.env.NODE_ENV;
 
 const config = {

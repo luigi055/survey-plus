@@ -1,4 +1,4 @@
-// @Flow
+// @flow
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {connect} from 'react-redux';
@@ -14,7 +14,11 @@ const SurveyNew = () => <h2>SurveyNew</h2>;
 //   fetchUser:
 // }
 
-class App extends Component {
+type Props = {
+  fetchUser: Function,
+};
+
+class App extends Component<Props> {
   componentDidMount () {
     this.props.fetchUser ();
   }
