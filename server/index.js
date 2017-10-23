@@ -49,13 +49,6 @@ app.use (
 app.use (passport.initialize ());
 app.use (passport.session ());
 
-app.get ('/', (req, res) => {
-  res.send ({
-    working: 'yes, of course!',
-  });
-});
-
-
 // Logic in production if there is no match the express routes here
 // Routes
 authRoutes (app);
@@ -65,16 +58,15 @@ billingRoutes (app);
 if (process.env.NODE_ENV === 'production') {
   // Making sure that express will serve up production
   // assets like out main.js file, or main.css file
-  app.use(express.static('client/public'));
-
+  app.use (express.static ('client/public'));
 
   // if there's not a public index.html go directly to index.html
-  
+
   // express will serves up the index.hmtl file if it
   // doesnt recognize the route
-  const path = require('path');
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'public', 'index.html'));
+  const path = require ('path');
+  app.get ('*', (req, res) => {
+    res.sendFile (path.resolve (__dirname, 'client', 'public', 'index.html'));
   });
 }
 
