@@ -2,15 +2,12 @@ const path = require ('path');
 const webpack = require ('webpack');
 const ExtractTextPlugin = require ('extract-text-webpack-plugin');
 const HTMLWebpackPlugin = require ('html-webpack-plugin');
-const clientConfig = require ('./../config/config.json');
 
 const devPORT = 8080;
 const publicFile = 'public';
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-process.env.STRIPE_PUBLISHABLE_KEY =
-  process.env.STRIPE_PUBLISHABLE_KEY ||
-  clientConfig.development.STRIPE_PUBLISHABLE_KEY;
+process.env.STRIPE_PUBLISHABLE_KEY = process.env.STRIPE_PUBLISHABLE_KEY;
 const env = process.env.NODE_ENV;
 
 const config = {
