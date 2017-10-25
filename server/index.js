@@ -1,29 +1,29 @@
-require ('./config');
+require("./config");
 
-const express = require ('express');
-const bodyParser = require ('body-parser');
-const expressSession = require ('express-session');
-const passport = require ('passport');
-const cookieSession = require ('cookie-session');
-const mongoose = require ('./db/mongoose');
-const authRoutes = require ('./routes/authRoutes');
-const billingRoutes = require ('./routes/billingRoutes');
+const express = require("express");
+const bodyParser = require("body-parser");
+const expressSession = require("express-session");
+const passport = require("passport");
+const cookieSession = require("cookie-session");
+const mongoose = require("./db/mongoose");
+const authRoutes = require("./routes/authRoutes");
+const billingRoutes = require("./routes/billingRoutes");
 
-require ('./services/passport');
+require("./services/passport");
 
 const PORT = process.env.PORT || 3000;
-const app = express ();
+const app = express();
 
-app.use (bodyParser.json ());
-app.use (
-  bodyParser.urlencoded ({
-    extended: true,
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true
   })
 );
 
 // enable cookies in express app
-app.use (
-  cookieSession ({
+app.use(
+  cookieSession({
     // how long does this cookie going to be in the browser
     // expressed in miliseconds
     // so 30 days will be
@@ -31,7 +31,7 @@ app.use (
     maxAge: 30 * 24 * 60 * 60 * 1000,
 
     // keys to encrypt this cookie and this value should be random and difficult to remember
-    keys: [process.env.cookieKey],
+    keys: [process.env.cookieKey]
     // keys: ['asr5g4asrarg3ag4ag651aga5s'],
   })
 );
@@ -46,30 +46,30 @@ app.use (
 // );
 
 // enable passport to use cookies in authentication
-app.use (passport.initialize ());
-app.use (passport.session ());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Logic in production if there is no match the express routes here
 // Routes
-authRoutes (app);
-billingRoutes (app);
+authRoutes(app);
+billingRoutes(app);
 
 // then go and check if public index.html file has one
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === "production") {
   // Making sure that express will serve up production
   // assets like out main.js file, or main.css file
-  app.use (express.static ('client/public'));
+  app.use(express.static("client/public"));
 
   // if there's not a public index.html go directly to index.html
 
   // express will serves up the index.hmtl file if it
   // doesnt recognize the route
-  const path = require ('path');
-  app.get ('*', (req, res) => {
-    res.sendFile (path.resolve (__dirname, 'client', 'public', 'index.html'));
-  });
+  // const path = require ('path');
+  // app.get ('*', (req, res) => {
+  //   res.sendFile (path.resolve (__dirname, 'client', 'public', 'index.html'));
+  // });
 }
 
-app.listen (PORT, () => {
-  console.log (`Server completely running on port ${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server completely running on port ${PORT}`);
 });
